@@ -3,9 +3,12 @@
 [Swagger API Documentation](https://jobs-api-backend-c4563190d035.herokuapp.com/api-docs/)
 Jobify - Full Stack Job Management Application
 
-Project Overview
 
-Jobs Ui is a full-stack job management application that allows users to register, log in, and manage job-related tasks.<br> After successful authentication, users can perform CRUD (Create, Read, Update, Delete) operations on job listings.<br> The backend is built with Node.js, Express.js, and MongoDB,<br> while the frontend is developed using React.js and interacts with the API to provide a seamless user experience.<br>
+Project Overview
+This project is a key step in my journey to mastering full-stack development. I started by building and deploying a backend API using Node.js, Express, and MongoDB, with full CRUD capabilities for job management.<br> Now, I'm integrating that backend with a frontend application to provide a complete user experience, showcasing both server-side and client-side development skills.<br>
+
+My goal is to solidify my understanding of the full development cycle by working with real-world tools and technologies, handling everything from database management to API design, and building a responsive UI.<br> This project helps me connect the dots between backend and frontend development, bringing everything together in a live application.<br>
+
 
 <br>
 <br>
