@@ -1,7 +1,42 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./components/Layout";
+import SignIn from "./components/SignIn";
+import Login from "./components/Login";
+import ProfileLayout from "./components/ProfileLayout";
+import Jobs from "./components/Jobs";
+import CreateJob from "./components/CreateJob";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "/", element: <SignIn /> },
+      { path: "/login", element: <Login /> },
+    ],
+  },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute>
+        <ProfileLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { path: "", element: <Jobs /> },
+      { path: "add-job", element: <CreateJob /> },
+    ],
+  },
+]);
+
 function App() {
   return (
     <>
-      <h1 className="text-red-700">gamarjoba</h1>
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }
