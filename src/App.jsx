@@ -8,6 +8,7 @@ import CreateJob from "./components/CreateJob";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <Jobs /> },
       { path: "add-job", element: <CreateJob /> },
+      { path: ":id", element: <Profile /> },
     ],
   },
 ]);
