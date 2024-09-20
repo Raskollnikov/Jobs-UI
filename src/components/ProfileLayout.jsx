@@ -13,9 +13,9 @@ const ProfileLayout = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen z-10">
       {/* Sidebar */}
-      <div className="fixed top-0 left-0 h-full w-16 bg-gray-800 text-white flex flex-col items-center transition-all duration-300 ease-in-out hover:w-[200px] group">
+      <div className="hidden md:fixed top-0 left-0 h-full w-16 bg-gray-800 text-white md:flex flex-col items-center transition-all duration-300 ease-in-out hover:w-[170px] group">
         <div className="flex flex-col items-center mt-10">
           <div className="bg-blue-500 text-white font-bold text-lg h-12 w-12 flex items-center justify-center rounded-full">
             {userName ? userName[0].toUpperCase() : "U"}
@@ -48,7 +48,7 @@ const ProfileLayout = () => {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 ml-16 p-6 bg-gray-100">
+      <main className="flex-1 ml-16 p-6">
         <Outlet /> {/* This is where child routes will be rendered */}
       </main>
     </div>
