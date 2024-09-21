@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 function Profile() {
   const { id } = useParams();
   const [jobData, setJobData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     company: "",
     position: "",
@@ -11,6 +14,7 @@ function Profile() {
   });
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchJob = async () => {
       try {
@@ -23,7 +27,20 @@ function Profile() {
             },
           }
         );
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            throw new Error("job not found");
+          } else {
+            throw new Error("failed to fetch job data");
+          }
+        }
+
         const data = await response.json();
+        if (!data.job) {
+          throw new Error("job data is missing");
+        }
+
         setJobData(data.job);
         setFormData({
           company: data.job.company,
@@ -31,7 +48,10 @@ function Profile() {
           status: data.job.status,
         });
       } catch (error) {
-        console.error("Error fetching job data:", error);
+        console.error("error fetching job data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -59,29 +79,50 @@ function Profile() {
       );
       if (response.ok) {
         toast.success("Job updated successfully!");
+        navigate("/profile");
       } else {
         toast.error("Failed to update job");
       }
-      navigate("/profile");
     } catch (error) {
       console.error("Error updating job:", error);
     }
   };
 
-  //shimmer until we get data
-  if (!jobData) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
-          <h1 className="text-2xl font-bold mb-4 text-center ">Loading...</h1>
-          <div className="mb-4  h-6 w-full"></div>
-          <div className="mb-4  h-6 w-full"></div>
-          <div className="mb-4  h-6 w-full"></div>
-          <div className="mb-4  h-6 w-full"></div>
+          <h1 className="text-2xl font-bold mb-4 text-center">Loading...</h1>
+          <div className="space-y-4">
+            <div className="h-6 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-6 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-6 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-6 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse w-1/2 mx-auto"></div>
+          </div>
         </div>
       </div>
     );
   }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
+          <h1 className="text-2xl font-bold mb-4 text-center text-red-500">
+            {error}
+          </h1>
+          <button
+            onClick={() => navigate("/profile")}
+            className="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-700 transition duration-200"
+          >
+            Go Back
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">

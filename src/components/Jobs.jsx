@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 function Jobs() {
   const token = localStorage.getItem("token");
   const [job, setJob] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [hamburgerState, setHamburgerState] = useState({});
 
   useEffect(() => {
@@ -30,6 +31,8 @@ function Jobs() {
         }
       } catch (error) {
         console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
       }
     };
     if (token) {
@@ -69,11 +72,11 @@ function Jobs() {
   const getStatusStyle = (status) => {
     switch (status) {
       case "pending":
-        return "bg-yellow-300 text-gray-800"; // Yellow for pending
+        return "bg-yellow-300 text-gray-800";
       case "interview":
-        return "bg-green-300 text-gray-800"; // Green for interview
+        return "bg-green-300 text-gray-800";
       case "declined":
-        return "bg-red-600 text-white"; // Red for declined
+        return "bg-red-600 text-white";
       default:
         return "";
     }
@@ -84,7 +87,18 @@ function Jobs() {
       <div className="w-full flex flex-col items-center bg-white shadow-md p-6 rounded-lg max-w-5xl mx-auto mt-4">
         <h1 className="text-2xl font-bold mb-6">My Jobs</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          {job && job.length > 0 ? (
+          {loading ? (
+            Array.from({ length: 4 }).map((_, index) => (
+              <div
+                key={index}
+                className="animate-pulse p-4 border border-gray-200 rounded-lg shadow-sm bg-gray-200"
+              >
+                <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+              </div>
+            ))
+          ) : job && job.length > 0 ? (
             job.map((each) => (
               <div
                 key={each._id}
