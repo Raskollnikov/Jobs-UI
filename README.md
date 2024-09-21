@@ -1,13 +1,14 @@
 # React + Vite
 
-[Swagger API Documentation](https://jobs-api-backend-c4563190d035.herokuapp.com/api-docs/)
-Jobify - Full Stack Job Management Application
-
-finnally i finished my first ever full stack app, using my API
-
 Live Demo : [website](https://arsen-jobs-app.netlify.app/)
 
-Project Overview
+my Api - [Swagger API Documentation](https://jobs-api-backend-c4563190d035.herokuapp.com/api-docs/)
+Jobify - Full Stack Job Management Application
+
+ i finished my first ever full stack app
+
+
+Project Overview <br>
 This project is a key step in my journey to mastering full-stack development. I started by building and deploying a backend API using Node.js, Express, and MongoDB, with full CRUD capabilities for job management.<br> Now, I'm integrating that backend with a frontend application to provide a complete user experience, showcasing both server-side and client-side development skills.<br>
 
 My goal is to solidify my understanding of the full development cycle by working with real-world tools and technologies, handling everything from database management to API design, and building a responsive UI.<br> This project helps me connect the dots between backend and frontend development, bringing everything together in a live application.<br>
